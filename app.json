@@ -1,8 +1,8 @@
 {
   "expo": {
-    "name": "postdroid",
+    "name": "Postdroid",
     "slug": "postdroid",
-    "version": "1.0.0",
+    "version": "0.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
@@ -17,7 +17,7 @@
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
+        "backgroundColor": "#143447"
       }
     },
     "web": {
