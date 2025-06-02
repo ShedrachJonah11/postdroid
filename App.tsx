@@ -1,19 +1,25 @@
-import { StyleSheet, View } from "react-native";
-import APITester from "./src/screens/Tester";
+import { useEffect } from "react";
+import { StatusBar } from "expo-status-bar";
+import * as SplashScreen from "expo-splash-screen";
+import Router from "./src/router/Router";
+import { SafeAreaProvider } from "react-native-safe-area-context";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
+
+SplashScreen.preventAutoHideAsync();
 
 export default function App() {
+  useEffect(() => {
+    (async () => {
+      await SplashScreen.hideAsync();
+    })();
+  }, []);
+
   return (
-    <View style={styles.container}>
-      <APITester />
-    </View>
+    <GestureHandlerRootView style={{ flex: 1 }}>
+      <SafeAreaProvider>
+        <StatusBar style="auto" />
+        <Router />
+      </SafeAreaProvider>
+    </GestureHandlerRootView>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});
