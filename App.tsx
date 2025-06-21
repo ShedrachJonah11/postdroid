@@ -4,6 +4,7 @@ import * as SplashScreen from "expo-splash-screen";
 import Router from "./src/router/Router";
 import { SafeAreaProvider } from "react-native-safe-area-context";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
+import { ThemeProvider } from "./src/context/ThemeContext";
 
 SplashScreen.preventAutoHideAsync();
 
@@ -17,8 +18,10 @@ export default function App() {
   return (
     <GestureHandlerRootView style={{ flex: 1 }}>
       <SafeAreaProvider>
-        <StatusBar style="auto" />
-        <Router />
+        <ThemeProvider>
+          <StatusBar style="auto" />
+          <Router />
+        </ThemeProvider>
       </SafeAreaProvider>
     </GestureHandlerRootView>
   );
