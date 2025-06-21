@@ -16,6 +16,9 @@ import pckgJson from "../../package.json";
 export default function SettingsScreen() {
   const { theme, isDark, toggleTheme } = useTheme();
 
+  console.log("theme:", theme);
+  console.log("isDark:", isDark);
+
   const version = pckgJson.version;
 
   const goToGitHubRepositoryPage = async () => {
