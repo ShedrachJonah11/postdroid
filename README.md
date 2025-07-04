@@ -53,4 +53,4 @@ View formatted response details in real-time.
 
 ## Contributions
 
-Contributions are welcome. See `CONTRIBUTING.md`.
+Contributions are welcome. See [CONTRIBUTING.md](./CONTRIBUTING.md).
