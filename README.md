@@ -40,9 +40,9 @@ View formatted response details in real-time.
 
 ## To Do
 
-- [] History and saved requests
-- [] Save and manage API request collections
-- [] Authentication support (Basic, Bearer, OAuth)
+- [ ] History and saved requests
+- [ ] Save and manage API request collections
+- [ ] Authentication support (Basic, Bearer, OAuth)
 
 ## Tech Stack
 
