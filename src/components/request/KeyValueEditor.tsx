@@ -8,7 +8,7 @@ import {
 } from "react-native";
 import { useTheme } from "../../context/ThemeContext";
 import { KeyValuePair } from "../../types/api";
-import { X } from "lucide-react-native";
+import { X, Edit3 } from "lucide-react-native";
 
 type KeyValueEditorProps = {
   items: KeyValuePair[];
@@ -69,49 +69,43 @@ export const KeyValueEditor: React.FC<KeyValueEditorProps> = ({
           style={[
             styles.itemContainer,
             {
-              backgroundColor: theme.colors.background,
-              borderColor: theme.colors.border,
+              backgroundColor: theme.colors.keyValueEditor.background,
+              borderColor: theme.colors.keyValueEditor.border,
             },
           ]}
         >
-          <View style={styles.inputsContainer}>
-            <TextInput
+          <Edit3 size={16} color={theme.colors.keyValueEditor.icon} />
+          
+          <View style={styles.textContainer}>
+            <Text
               style={[
-                styles.input,
+                styles.parameterText,
                 {
-                  color: theme.colors.text,
+                  color: theme.colors.keyValueEditor.text,
                   fontFamily: theme.typography.fontFamily.regular,
-                  opacity: 1,
                 },
               ]}
-              value={item.key}
-              onChangeText={(text) => handleKeyChange(index, text)}
-              placeholder={keyPlaceholder}
-              placeholderTextColor={theme.colors.subtext}
-              autoCapitalize="none"
-            />
-            <TextInput
+            >
+              {item.key || keyPlaceholder}
+            </Text>
+            <Text
               style={[
-                styles.input,
+                styles.valueText,
                 {
-                  color: theme.colors.text,
+                  color: theme.colors.keyValueEditor.text,
                   fontFamily: theme.typography.fontFamily.regular,
-                  opacity: 1,
                 },
               ]}
-              value={item.value}
-              onChangeText={(text) => handleValueChange(index, text)}
-              placeholder={valuePlaceholder}
-              placeholderTextColor={theme.colors.subtext}
-              autoCapitalize="none"
-            />
+            >
+              {item.value || valuePlaceholder}
+            </Text>
           </View>
 
           <TouchableOpacity
             onPress={() => handleRemove(index)}
             style={styles.removeButton}
           >
-            <X size={16} color={theme.colors.error} />
+            <X size={16} color={theme.colors.keyValueEditor.deleteIcon} />
           </TouchableOpacity>
         </View>
       ))}
@@ -135,26 +129,26 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     borderWidth: 1,
-    borderRadius: 8,
+    borderRadius: 12,
     marginBottom: 8,
-    paddingHorizontal: 8,
-    paddingVertical: 6,
+    paddingHorizontal: 12,
+    paddingVertical: 10,
   },
-  toggleButton: {
-    padding: 4,
-  },
-  inputsContainer: {
+  textContainer: {
     flex: 1,
     flexDirection: "row",
-    paddingHorizontal: 4,
+    justifyContent: "center",
+    marginLeft: 8,
+    gap: 16,
   },
-  input: {
-    flex: 1,
+  parameterText: {
     fontSize: 14,
-    paddingVertical: 4,
-    paddingHorizontal: 8,
+  },
+  valueText: {
+    fontSize: 14,
   },
   removeButton: {
     padding: 4,
+    marginLeft: 8,
   },
 });
