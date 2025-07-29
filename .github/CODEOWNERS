@@ -1,1 +1,10 @@
-* @cedrickah
+# Each line is a file pattern followed by one or more owners.
+
+assets/                         @cedrickah @ShedrachJonah11
+src/lib/                        @cedrickah
+src/components/                 @cedrickah @ShedrachJonah11
+src/constants/                  @cedrickah @ShedrachJonah11
+src/context/                    @cedrickah @ShedrachJonah11
+src/router/                     @cedrickah @ShedrachJonah11
+src/screens/                    @cedrickah @ShedrachJonah11
+src/types/                      @cedrickah @ShedrachJonah11
