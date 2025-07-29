@@ -1,10 +1,5 @@
 import React, { useState } from "react";
-import {
-  View,
-  Text,
-  StyleSheet,
-  TouchableOpacity,
-} from "react-native";
+import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
 import { useTheme } from "../../context/ThemeContext";
 
 type Tab = {
@@ -19,10 +14,10 @@ type TabViewProps = {
   style?: any;
 };
 
-export const TabView: React.FC<TabViewProps> = ({ 
-  tabs, 
+export const TabView: React.FC<TabViewProps> = ({
+  tabs,
   showContent = true,
-  style 
+  style,
 }) => {
   const { theme } = useTheme();
   const [activeTab, setActiveTab] = useState(tabs[0]?.key || "");
@@ -47,19 +42,19 @@ export const TabView: React.FC<TabViewProps> = ({
           const isLast = index === tabs.length - 1;
 
           return (
-                          <TouchableOpacity
-                key={tab.key}
-                onPress={() => handleTabPress(tab.key)}
-                style={[
-                  styles.tab,
-                  isActive && {
-                    ...styles.activeTab,
-                    backgroundColor: theme.colors.primary,
-                  },
-                  isFirst && styles.firstTab,
-                  isLast && styles.lastTab,
-                ]}
-              >
+            <TouchableOpacity
+              key={tab.key}
+              onPress={() => handleTabPress(tab.key)}
+              style={[
+                styles.tab,
+                isActive && {
+                  ...styles.activeTab,
+                  backgroundColor: theme.colors.primary,
+                },
+                isFirst && styles.firstTab,
+                isLast && styles.lastTab,
+              ]}
+            >
               <Text
                 style={[
                   styles.tabText,
@@ -79,7 +74,7 @@ export const TabView: React.FC<TabViewProps> = ({
           );
         })}
       </View>
-      
+
       {showContent && (
         <View style={styles.contentContainer}>
           {tabs.find((tab) => tab.key === activeTab)?.content}
