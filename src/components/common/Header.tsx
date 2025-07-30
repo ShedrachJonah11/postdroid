@@ -41,6 +41,8 @@ export const Header: React.FC<HeaderProps> = ({
                 <ArrowLeft size={24} color={theme.colors.primary} />
               </TouchableOpacity>
             )}
+          </View>
+          <View style={styles.centerContainer}>
             <Text
               style={[
                 styles.title,
@@ -53,9 +55,9 @@ export const Header: React.FC<HeaderProps> = ({
               {title}
             </Text>
           </View>
-          {rightComponent && (
-            <View style={styles.rightContainer}>{rightComponent}</View>
-          )}
+          <View style={styles.rightContainer}>
+            {rightComponent}
+          </View>
         </View>
       </SafeAreaView>
     </View>
@@ -91,6 +93,10 @@ const styles = StyleSheet.create({
   },
   rightContainer: {
     flexDirection: "row",
+    alignItems: "center",
+  },
+  centerContainer: {
+    flex: 1,
     alignItems: "center",
   },
 });

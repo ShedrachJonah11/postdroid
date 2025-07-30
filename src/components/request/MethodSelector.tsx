@@ -42,8 +42,8 @@ export const MethodSelector: React.FC<MethodSelectorProps> = ({
         style={[
           styles.methodButton,
           {
-            backgroundColor: getMethodColor(selectedMethod) + "20",
-            borderColor: getMethodColor(selectedMethod),
+            backgroundColor: theme.colors.methodSelector.background,
+            borderColor: theme.colors.methodSelector.border,
           },
         ]}
       >
@@ -51,14 +51,14 @@ export const MethodSelector: React.FC<MethodSelectorProps> = ({
           style={[
             styles.methodButtonText,
             {
-              color: getMethodColor(selectedMethod),
+              color: theme.colors.methodSelector.text,
               fontFamily: theme.typography.fontFamily.medium,
             },
           ]}
         >
           {selectedMethod}
         </Text>
-        <ChevronDown size={16} color={getMethodColor(selectedMethod)} />
+        <ChevronDown size={16} color={theme.colors.methodSelector.text} />
       </TouchableOpacity>
 
       <Modal
@@ -123,12 +123,13 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     justifyContent: "center",
-    paddingHorizontal: 12,
+    paddingHorizontal: 10,
     paddingVertical: 6,
     borderRadius: 8,
     borderWidth: 1,
     marginRight: 8,
-    minWidth: 80,
+    minWidth: 70,
+    height: 40,
   },
   methodButtonText: {
     fontSize: 14,

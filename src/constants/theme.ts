@@ -15,6 +15,54 @@ export type Theme = {
     statusBar: "light" | "dark";
     tabBar: string;
     tabBarInactive: string;
+    methodSelector: {
+      background: string;
+      border: string;
+      text: string;
+    };
+    input: {
+      border: string;
+    };
+    tabView: {
+      background: string;
+      activeText: string;
+      inactiveText: string;
+    };
+    bodyTypeSelector: {
+      selectedBackground: string;
+      selectedText: string;
+      unselectedBackground: string;
+      unselectedText: string;
+      border: string;
+    };
+    button: {
+      addParameter: {
+        background: string;
+        text: string;
+      };
+      sendRequest: {
+        background: string;
+        text: string;
+      };
+    };
+    keyValueEditor: {
+      background: string;
+      border: string;
+      text: string;
+      icon: string;
+      deleteIcon: string;
+      divider: string;
+    };
+    borderLine: string;
+    response: {
+      statusBackground: string;
+      statusText: string;
+      timeBackground: string;
+      timeText: string;
+      statusBadgeBackground: string;
+      contentBackground: string;
+      contentBorder: string;
+    };
     requestMethodColors: {
       GET: string;
       POST: string;
@@ -58,11 +106,11 @@ export type Theme = {
 
 export const lightTheme: Theme = {
   colors: {
-    primary: "#0A84FF",
+    primary: "#71C6FF",
     secondary: "#5E5CE6",
     accent: "#BF5AF2",
-    background: "#F2F2F7",
-    card: "#FFFFFF",
+    background: "#FFFFFF",
+    card: "#F4FAFF",
     text: "#000000",
     subtext: "#8E8E93",
     border: "#E5E5EA",
@@ -73,6 +121,54 @@ export const lightTheme: Theme = {
     statusBar: "dark",
     tabBar: "#FFFFFF",
     tabBarInactive: "#8E8E93",
+    methodSelector: {
+      background: "#DEF3FF",
+      border: "#14344766",
+      text: "#143447",
+    },
+    input: {
+      border: "#E3E3E3",
+    },
+    tabView: {
+      background: "#2C3E50",
+      activeText: "#143447",
+      inactiveText: "#FFFFFF",
+    },
+    bodyTypeSelector: {
+      selectedBackground: "#2C3E50",
+      selectedText: "#FFFFFF",
+      unselectedBackground: "#DEF3FF",
+      unselectedText: "#143447",
+      border: "#14344766",
+    },
+    button: {
+      addParameter: {
+        background: "#FF0763",
+        text: "#FFFFFF",
+      },
+      sendRequest: {
+        background: "#FFE0EB",
+        text: "#FF0763B2",
+      },
+    },
+    keyValueEditor: {
+      background: "#FEF7FA",
+      border: "#FF8FB8",
+      text: "#8E8E93",
+      icon: "#8E8E93",
+      deleteIcon: "#FF0763",
+      divider: "#E3E3E3",
+    },
+    borderLine: "#E3E3E3",
+    response: {
+      statusBackground: "#DEF3FF",
+      statusText: "#143447",
+      timeBackground: "#DEF3FF",
+      timeText: "#143447",
+      statusBadgeBackground: "#71C6FF",
+      contentBackground: "#FFFFFF",
+      contentBorder: "#E3E3E3",
+    },
     requestMethodColors: {
       GET: "#34C759",
       POST: "#0A84FF",
@@ -126,6 +222,54 @@ export const darkTheme: Theme = {
     statusBar: "light",
     tabBar: "#1C1C1E",
     tabBarInactive: "#8E8E93",
+    methodSelector: {
+      background: "#DEF3FF",
+      border: "#14344766",
+      text: "#143447",
+    },
+    input: {
+      border: "#E3E3E3",
+    },
+    tabView: {
+      background: "#2C3E50",
+      activeText: "#143447",
+      inactiveText: "#FFFFFF",
+    },
+    bodyTypeSelector: {
+      selectedBackground: "#2C3E50",
+      selectedText: "#FFFFFF",
+      unselectedBackground: "#DEF3FF",
+      unselectedText: "#143447",
+      border: "#14344766",
+    },
+    button: {
+      addParameter: {
+        background: "#FF0763",
+        text: "#FFFFFF",
+      },
+      sendRequest: {
+        background: "#FFE0EB",
+        text: "#FF0763B2",
+      },
+    },
+    keyValueEditor: {
+      background: "#FEF7FA",
+      border: "#FF8FB8",
+      text: "#8E8E93",
+      icon: "#8E8E93",
+      deleteIcon: "#FF0763",
+      divider: "#E3E3E3",
+    },
+    borderLine: "#E3E3E3",
+    response: {
+      statusBackground: "#DEF3FF",
+      statusText: "#143447",
+      timeBackground: "#DEF3FF",
+      timeText: "#143447",
+      statusBadgeBackground: "#71C6FF",
+      contentBackground: "#FFFFFF",
+      contentBorder: "#E3E3E3",
+    },
     requestMethodColors: {
       ...lightTheme.colors.requestMethodColors,
     },
