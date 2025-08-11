@@ -12,10 +12,12 @@ import { Header } from "../components/common/Header";
 import { Sun, Moon, Info, Code, ExternalLink } from "lucide-react-native";
 import * as Linking from "expo-linking";
 import pckgJson from "../../package.json";
+import { Dimensions } from 'react-native';
+const screenwidth = Dimensions.get('window').width;
+
 
 export default function SettingsScreen() {
   const { theme, isDark, toggleTheme } = useTheme();
-
   const version = pckgJson.version;
 
   const goToGitHubRepositoryPage = async () => {
@@ -23,6 +25,7 @@ export default function SettingsScreen() {
       await Linking.openURL("https://github.com/Open-Devans/postdroid");
     } catch (error) {}
   };
+  
 
   const settingsSections = [
     {
@@ -63,7 +66,7 @@ export default function SettingsScreen() {
   const renderSettingItem = (item: any, index: number) => {
     return (
       <View
-        key={index}
+        key={`${item.title}-${index}`}
         style={[
           styles.settingItem,
           {
@@ -124,6 +127,8 @@ export default function SettingsScreen() {
     );
   };
 
+    
+
   return (
     <View
       style={[styles.container, { backgroundColor: theme.colors.background }]}
@@ -136,7 +141,9 @@ export default function SettingsScreen() {
         showsVerticalScrollIndicator={false}
       >
         {settingsSections.map((section, sectionIndex) => (
-          <View style={[styles.sectionContainer, 
+          <View 
+          key={`${section.title}-${sectionIndex}`}
+          style={[styles.sectionContainer, 
             {
               backgroundColor: theme.colors.card,
                borderBottomColor: theme.colors.border,
@@ -187,28 +194,28 @@ const styles = StyleSheet.create({
   
   },
   sectionContainer: {
+    marginHorizontal: 20,
+    width: screenwidth - 40,
     justifyContent: 'center',
     alignItems: "center",
 
     padding: 20,
     borderBottomWidth: 0.5,
     borderRadius: 15,
-    width: 390,
+    
     
     
   },
   section: {
-    marginBottom: 24,
-    gap: 26,
   
   },
   sectionTitle: {
     fontSize: 20,
     paddingHorizontal: 5,
-    width: 350,
+    width: screenwidth -40,
     padding: 10,
     borderLeftWidth: 6,
-    
+  
     
 
   },
