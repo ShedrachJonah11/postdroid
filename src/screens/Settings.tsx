@@ -70,7 +70,8 @@ export default function SettingsScreen() {
         style={[
           styles.settingItem,
           {
-            borderLeftColor: isDark ? '#71C6FF' : '#143447'
+            
+            borderLeftColor: theme.colors.leftBorderLine,
           },
         ]}
       >
@@ -157,8 +158,8 @@ export default function SettingsScreen() {
                 styles.sectionTitle,
                 {
                   fontFamily: theme.typography.fontFamily.medium,
-                  backgroundColor: isDark ? '#DEF3FF' : '#71C6FF',
-                  borderLeftColor: isDark ? '#71C6FF' : '#143447'
+                  backgroundColor: theme.colors.titleBackground,
+                  borderLeftColor: theme.colors.leftBorder,
                 },
               ]}
             >
