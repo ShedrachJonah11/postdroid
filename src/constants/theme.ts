@@ -15,6 +15,9 @@ export type Theme = {
     statusBar: "light" | "dark";
     tabBar: string;
     tabBarInactive: string;
+    titleBackground: string;
+    leftBorder: string;
+    leftBorderLine: string;
     methodSelector: {
       background: string;
       border: string;
@@ -121,6 +124,9 @@ export const lightTheme: Theme = {
     statusBar: "dark",
     tabBar: "#FFFFFF",
     tabBarInactive: "#8E8E93",
+    titleBackground: "#71C6FF",
+    leftBorder: "#143447",
+    leftBorderLine: "#15699B3",
     methodSelector: {
       background: "#DEF3FF",
       border: "#14344766",
@@ -222,6 +228,9 @@ export const darkTheme: Theme = {
     statusBar: "light",
     tabBar: "#1C1C1E",
     tabBarInactive: "#8E8E93",
+    titleBackground: "#DEF3FF",
+    leftBorder: "#71C6FF",
+    leftBorderLine: "#71C6FF",
     methodSelector: {
       background: "#DEF3FF",
       border: "#14344766",

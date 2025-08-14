@@ -12,10 +12,12 @@ import { Header } from "../components/common/Header";
 import { Sun, Moon, Info, Code, ExternalLink } from "lucide-react-native";
 import * as Linking from "expo-linking";
 import pckgJson from "../../package.json";
+import { Dimensions } from 'react-native';
+const screenwidth = Dimensions.get('window').width;
+
 
 export default function SettingsScreen() {
   const { theme, isDark, toggleTheme } = useTheme();
-
   const version = pckgJson.version;
 
   const goToGitHubRepositoryPage = async () => {
@@ -23,10 +25,11 @@ export default function SettingsScreen() {
       await Linking.openURL("https://github.com/Open-Devans/postdroid");
     } catch (error) {}
   };
+  
 
   const settingsSections = [
     {
-      title: "Appearance",
+      title: "Appearances",
       items: [
         {
           title: "Dark Mode",
@@ -67,8 +70,8 @@ export default function SettingsScreen() {
         style={[
           styles.settingItem,
           {
-            borderBottomColor: theme.colors.border,
-            backgroundColor: theme.colors.card,
+            
+            borderLeftColor: theme.colors.leftBorderLine,
           },
         ]}
       >
@@ -105,6 +108,7 @@ export default function SettingsScreen() {
                 {
                   color: item.textColor || theme.colors.primary,
                   fontFamily: theme.typography.fontFamily.medium,
+                  
                 },
               ]}
             >
@@ -124,6 +128,8 @@ export default function SettingsScreen() {
     );
   };
 
+    
+
   return (
     <View
       style={[styles.container, { backgroundColor: theme.colors.background }]}
@@ -136,13 +142,24 @@ export default function SettingsScreen() {
         showsVerticalScrollIndicator={false}
       >
         {settingsSections.map((section, sectionIndex) => (
-          <View key={sectionIndex} style={styles.section}>
+          <View 
+          key={sectionIndex}
+          style={[styles.sectionContainer, 
+            {
+              backgroundColor: theme.colors.card,
+               borderBottomColor: theme.colors.border,
+               margin: 20,
+              
+            }
+          ]}>
+                <View style={styles.section}>
             <Text
               style={[
                 styles.sectionTitle,
                 {
-                  color: theme.colors.subtext,
                   fontFamily: theme.typography.fontFamily.medium,
+                  backgroundColor: theme.colors.titleBackground,
+                  borderLeftColor: theme.colors.leftBorder,
                 },
               ]}
             >
@@ -151,13 +168,14 @@ export default function SettingsScreen() {
             <View
               style={[
                 styles.sectionContent,
-                { backgroundColor: theme.colors.card },
+                // { backgroundColor: theme.colors.card },
               ]}
             >
               {section.items.map((item, index) =>
                 renderSettingItem(item, index)
               )}
             </View>
+          </View>
           </View>
         ))}
       </ScrollView>
@@ -173,22 +191,39 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   scrollContent: {
-    paddingTop: 90,
-    paddingBottom: 40,
+    paddingTop: 140,
+  
+  },
+  sectionContainer: {
+    marginHorizontal: 20,
+    width: screenwidth - 40,
+    justifyContent: 'center',
+    alignItems: "center",
+
+    padding: 20,
+    borderBottomWidth: 0.5,
+    borderRadius: 15,
+    
+    
+    
   },
   section: {
-    marginBottom: 24,
+  
   },
   sectionTitle: {
-    fontSize: 14,
-    marginBottom: 8,
-    paddingHorizontal: 16,
-    textTransform: "uppercase",
+    fontSize: 20,
+    paddingHorizontal: 5,
+    width: screenwidth -40,
+    padding: 10,
+    borderLeftWidth: 6,
+  
+    
+
   },
   sectionContent: {
     borderRadius: 12,
-    marginHorizontal: 16,
-    overflow: "hidden",
+   
+    
   },
   settingItem: {
     flexDirection: "row",
@@ -196,7 +231,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
     paddingVertical: 14,
     paddingHorizontal: 16,
-    borderBottomWidth: 0.5,
+    borderLeftWidth: 0.5,
   },
   settingItemLeft: {
     flexDirection: "row",
