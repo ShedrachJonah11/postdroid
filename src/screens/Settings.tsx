@@ -66,7 +66,7 @@ export default function SettingsScreen() {
   const renderSettingItem = (item: any, index: number) => {
     return (
       <View
-        key={`${item.title}-${index}`}
+        key={index}
         style={[
           styles.settingItem,
           {
@@ -143,7 +143,7 @@ export default function SettingsScreen() {
       >
         {settingsSections.map((section, sectionIndex) => (
           <View 
-          key={`${section.title}-${sectionIndex}`}
+          key={sectionIndex}
           style={[styles.sectionContainer, 
             {
               backgroundColor: theme.colors.card,
@@ -152,7 +152,7 @@ export default function SettingsScreen() {
               
             }
           ]}>
-                <View key={sectionIndex} style={styles.section}>
+                <View style={styles.section}>
             <Text
               style={[
                 styles.sectionTitle,
