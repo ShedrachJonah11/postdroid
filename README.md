@@ -42,13 +42,13 @@ View formatted response details in real-time.
 
 - [ ] History and saved requests
 - [ ] Save and manage API request collections
-- [ ] Authentication support (Basic, Bearer, OAuth)
+- [x] Authentication support (Basic, Bearer, OAuth)
 
 ## Tech Stack
 
 - **React Native** (Expo)
 - **TypeScript**
-- **fetch** for HTTP requests
+- **Fetch** for HTTP requests
 - **React Navigation** for in-app navigation
 
 ## Contributions
