@@ -27,6 +27,16 @@ export class Req {
         urlObj.searchParams.append(param.key, param.value);
       }
     });
+
+    // Add API Key in query params if needed
+    if (
+      this._data.auth?.type === "apiKey" &&
+      this._data.auth.addTo === "query"
+    ) {
+      if (this._data.auth.key) {
+        urlObj.searchParams.append(this._data.auth.key, this._data.auth.value);
+      }
+    }
     return urlObj;
   }
 
@@ -41,6 +51,17 @@ export class Req {
         headers.append(header.key, header.value);
       }
     });
+
+    // Inject auth headers
+    const auth = this._data.auth;
+    if (auth?.type === "basic") {
+      const encoded = btoa(`${auth.username}:${auth.password}`);
+      headers.set("Authorization", `Basic ${encoded}`);
+    } else if (auth?.type === "bearer") {
+      headers.set("Authorization", `Bearer ${auth.token}`);
+    } else if (auth?.type === "apiKey" && auth.addTo === "header") {
+      headers.set(auth.key, auth.value);
+    }
     return headers;
   }
 
