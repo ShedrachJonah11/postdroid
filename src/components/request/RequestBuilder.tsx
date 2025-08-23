@@ -32,6 +32,7 @@ export const RequestBuilder: React.FC<RequestBuilderProps> = ({
 }) => {
   const { theme } = useTheme();
   const [isBodyFocused, setIsBodyFocused] = useState(false);
+  const [errors, setErrors] = useState<{ [key: string]: string }>({});
 
   const [requestData, setRequestData] = useState<RequestData>({
     url: "",
@@ -67,6 +68,9 @@ export const RequestBuilder: React.FC<RequestBuilderProps> = ({
   };
 
   const handleSendRequest = () => {
+    if (!validateRequest()) {
+      return;
+    }
     onExecute(requestData);
   };
 
@@ -78,6 +82,19 @@ export const RequestBuilder: React.FC<RequestBuilderProps> = ({
   const addNewParam = () => {
     const newParams = [...requestData.params, { key: "", value: "" }];
     setRequestData((prev) => ({ ...prev, params: newParams }));
+  };
+
+  const validateRequest = (): boolean => {
+    let newErrors: { [key: string]: string } = {};
+
+    if (requestData.auth?.type === "apiKey") {
+      if (!requestData.auth.key?.trim()) {
+        newErrors.apiKey = "API Key name is required";
+      }
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
   };
 
   const tabs = [
@@ -215,6 +232,175 @@ export const RequestBuilder: React.FC<RequestBuilderProps> = ({
         </View>
       ),
     },
+    {
+      key: "auth",
+      title: "Auth",
+      content: (
+        <View style={styles.tabContent}>
+          {["none", "basic", "bearer", "apiKey"].map((type) => {
+            const isSelected =
+              requestData.auth?.type === type ||
+              (!requestData.auth && type === "none");
+            return (
+              <TouchableOpacity
+                key={type}
+                onPress={() =>
+                  setRequestData((prev) => ({
+                    ...prev,
+                    auth:
+                      type === "none"
+                        ? { type: "none" }
+                        : type === "basic"
+                        ? { type: "basic", username: "", password: "" }
+                        : type === "bearer"
+                        ? { type: "bearer", token: "" }
+                        : {
+                            type: "apiKey",
+                            key: "",
+                            value: "",
+                            addTo: "header",
+                          },
+                  }))
+                }
+                style={[
+                  styles.bodyTypeButton,
+                  {
+                    backgroundColor: isSelected
+                      ? theme.colors.bodyTypeSelector.selectedBackground
+                      : theme.colors.bodyTypeSelector.unselectedBackground,
+                  },
+                ]}
+              >
+                <Text
+                  style={{
+                    color: isSelected
+                      ? theme.colors.bodyTypeSelector.selectedText
+                      : theme.colors.bodyTypeSelector.unselectedText,
+                  }}
+                >
+                  {type.toUpperCase()}
+                </Text>
+              </TouchableOpacity>
+            );
+          })}
+
+          {requestData.auth?.type === "basic" && (
+            <>
+              <TextInput
+                style={[
+                  styles.input,
+                  {
+                    color: theme.colors.text,
+                    backgroundColor: theme.colors.background,
+                    borderColor: theme.colors.input.border,
+                    fontFamily: theme.typography.fontFamily.regular,
+                    marginBottom: 5,
+                  },
+                ]}
+                placeholder="Username"
+                value={requestData.auth.username}
+                onChangeText={(username) =>
+                  setRequestData((prev) => ({
+                    ...prev,
+                    auth: { ...(prev.auth as any), username },
+                  }))
+                }
+              />
+              <TextInput
+                style={[
+                  styles.input,
+                  {
+                    color: theme.colors.text,
+                    backgroundColor: theme.colors.background,
+                    borderColor: theme.colors.input.border,
+                    fontFamily: theme.typography.fontFamily.regular,
+                  },
+                ]}
+                placeholder="Password"
+                secureTextEntry
+                value={requestData.auth.password}
+                onChangeText={(password) =>
+                  setRequestData((prev) => ({
+                    ...prev,
+                    auth: { ...(prev.auth as any), password },
+                  }))
+                }
+              />
+            </>
+          )}
+
+          {requestData.auth?.type === "bearer" && (
+            <TextInput
+              style={[
+                styles.input,
+                {
+                  color: theme.colors.text,
+                  backgroundColor: theme.colors.background,
+                  borderColor: theme.colors.input.border,
+                  fontFamily: theme.typography.fontFamily.regular,
+                },
+              ]}
+              placeholder="Bearer Token"
+              value={requestData.auth.token}
+              onChangeText={(token) =>
+                setRequestData((prev) => ({
+                  ...prev,
+                  auth: { type: "bearer", token },
+                }))
+              }
+            />
+          )}
+
+          {requestData.auth?.type === "apiKey" && (
+            <>
+              <TextInput
+                style={[
+                  styles.input,
+                  {
+                    color: theme.colors.text,
+                    backgroundColor: theme.colors.background,
+                    borderColor: theme.colors.input.border,
+                    fontFamily: theme.typography.fontFamily.regular,
+                    marginBottom: 5,
+                  },
+                ]}
+                placeholder="Key"
+                value={requestData.auth.key}
+                onChangeText={(key) =>
+                  setRequestData((prev) => ({
+                    ...prev,
+                    auth: { ...(prev.auth as any), key },
+                  }))
+                }
+              />
+              {errors.apiKey && (
+                <Text style={styles.errorText}>{errors.apiKey}</Text>
+              )}
+
+              <TextInput
+                style={[
+                  styles.input,
+                  {
+                    color: theme.colors.text,
+                    backgroundColor: theme.colors.background,
+                    borderColor: theme.colors.input.border,
+                    fontFamily: theme.typography.fontFamily.regular,
+                  },
+                ]}
+                placeholder="Value"
+                value={requestData.auth.value}
+                onChangeText={(value) =>
+                  setRequestData((prev) => ({
+                    ...prev,
+                    auth: { ...(prev.auth as any), value },
+                  }))
+                }
+              />
+            </>
+          )}
+        </View>
+      ),
+    },
   ];
 
   return (
@@ -237,7 +423,7 @@ export const RequestBuilder: React.FC<RequestBuilderProps> = ({
           />
           <TextInput
             style={[
-              styles.urlInput,
+              styles.input,
               {
                 color: theme.colors.text,
                 backgroundColor: theme.colors.background,
@@ -284,9 +470,7 @@ export const RequestBuilder: React.FC<RequestBuilderProps> = ({
         </View>
       </View>
 
-            {requestData.bodyType === "none" && (
-        <ResponseSection />
-      )}
+      {requestData.bodyType === "none" && <ResponseSection />}
     </>
   );
 };
@@ -303,7 +487,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     paddingVertical: 12,
   },
-  urlInput: {
+  input: {
     flex: 1,
     height: 40,
     borderWidth: 1,
@@ -351,5 +535,10 @@ const styles = StyleSheet.create({
   authText: {
     fontSize: 14,
     textAlign: "center",
+  },
+  errorText: {
+    color: "red",
+    fontSize: 12,
+    marginBottom: 10,
   },
 });

@@ -29,6 +29,7 @@ export type RequestData = {
   params: Params;
   body?: any;
   bodyType?: BodyType;
+  auth?: AuthData;
 };
 
 export type ResponseData = {
@@ -38,3 +39,9 @@ export type ResponseData = {
   data: any;
   time: number;
 };
+
+type AuthData =
+  | { type: "none" }
+  | { type: "basic"; username: string; password: string }
+  | { type: "bearer"; token: string }
+  | { type: "apiKey"; key: string; value: string; addTo: "header" | "query" };
