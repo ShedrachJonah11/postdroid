@@ -5,16 +5,12 @@ import APITesterScreen from "../screens/Index";
 import SettingsScreen from "../screens/Settings";
 import { NavigationStackParamList } from "../types/navigation";
 import BottomTabs from "../components/common/BottomTabs";
-import Splash from "../screens/Splash";
+
 
 const Stack = createNativeStackNavigator<NavigationStackParamList>();
 
 const Router = () => {
-  const [showSplash, setShowSplash] = useState(true);
   
-    if (showSplash) {
-      return <Splash onFinish={() => setShowSplash(false)} />;
-    }
   return (
     <NavigationContainer>
       <Stack.Navigator>
