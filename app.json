@@ -16,8 +16,15 @@
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/logo.png",
-        "backgroundColor": "#143447"
+        "backgroundColor": "#143447",
+        "package": "com.opendevans.postdroid"
       }
-    }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "1efc7eaf-3a10-4355-b9b8-2a65e43a1855"
+      }
+    },
+    "owner": "open-devans"
   }
 }
