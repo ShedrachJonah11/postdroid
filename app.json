@@ -16,8 +16,7 @@
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/logo.png",
-        "backgroundColor": "#143447",
-        "package": "com.opendevans.postdroid"
+        "backgroundColor": "#143447"
       },
       "package": "com.opendevans.postdroid"
     },
