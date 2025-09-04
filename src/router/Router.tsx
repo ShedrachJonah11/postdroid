@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import APITesterScreen from "../screens/Index";
@@ -6,9 +6,11 @@ import SettingsScreen from "../screens/Settings";
 import { NavigationStackParamList } from "../types/navigation";
 import BottomTabs from "../components/common/BottomTabs";
 
+
 const Stack = createNativeStackNavigator<NavigationStackParamList>();
 
 const Router = () => {
+  
   return (
     <NavigationContainer>
       <Stack.Navigator>
